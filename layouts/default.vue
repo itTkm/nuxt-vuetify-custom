@@ -35,7 +35,9 @@
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span>&copy; {{ new Date().getFullYear() }} {{ author }}</span>
+      <v-spacer />
+      <span>v{{ version }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -44,7 +46,9 @@
 export default {
   data() {
     return {
-      title: 'Vuetify.js',
+      title: require('../package.json').appName,
+      version: require('../package.json').version,
+      author: require('../package.json').author,
       clipped: false,
       drawer: false,
       fixed: false,
