@@ -57,5 +57,12 @@ export default {
     Logo,
     VuetifyLogo,
   },
+  head() {
+    return {
+      // Page title is "appName"
+      titleTemplate: '',
+      title: require('../package.json').appName,
+    }
+  },
 }
 </script>

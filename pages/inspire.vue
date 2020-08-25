@@ -13,3 +13,14 @@
     </v-flex>
   </v-layout>
 </template>
+
+<script>
+export default {
+  head() {
+    return {
+      // Page title is "title - appName"
+      title: 'Inspire',
+    }
+  },
+}
+</script>
