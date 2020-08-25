@@ -38,6 +38,9 @@
       />
       <v-toolbar-title v-text="title" />
       <v-spacer />
+      <v-btn icon :to="switchLocalePath(getNextLanguage())">
+        <v-icon>mdi-translate</v-icon>
+      </v-btn>
       <v-btn icon @click="invertColors">
         <v-icon>mdi-invert-colors</v-icon>
       </v-btn>
@@ -63,6 +66,8 @@ export default {
       version: require('../package.json').version,
       author: require('../package.json').author,
       dark: this.isDark(),
+      lang: '',
+      nextLang: '',
       clipped: true,
       drawer: null,
       fixed: false,
@@ -70,19 +75,48 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
+          title: this.$t('menu.index'),
+          to: this.localePath('index', this.$i18n.locale),
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          title: this.$t('menu.inspire'),
+          to: this.localePath('inspire', this.$i18n.locale),
         },
       ],
     }
   },
   mounted() {
+    // Set default theme
     this.$vuetify.theme.dark = this.isDark()
+
+    // Set default language
+    this.lang = this.getLanguage()
+    if (this.lang !== this.$i18n.locale) {
+      this.$router.push(this.localePath('index', this.lang))
+    }
+  },
+  updated() {
+    // Update language setting
+    if (this.lang !== this.$i18n.locale) {
+      this.lang = this.$i18n.locale
+      localStorage.setItem('lang', this.lang)
+
+      // Update link of navigation drawer
+      this.items.forEach((item, i) => {
+        const path = item.to.split('/')
+        const routeName =
+          path[path.length - 1] !== '' ? path[path.length - 1] : 'index'
+        if (this.$i18n.locale === this.$i18n.defaultLocale) {
+          this.items[i].title = this.$t(`menu.${routeName}`)
+          this.items[i].to = '/' + path[path.length - 1]
+        } else {
+          this.items[i].title = this.$t(`menu.${routeName}`)
+          this.items[i].to =
+            '/' + this.$i18n.locale + '/' + path[path.length - 1]
+        }
+      })
+    }
   },
   methods: {
     invertColors() {
@@ -94,6 +128,18 @@ export default {
       return localStorage.getItem('dark') !== null
         ? localStorage.getItem('dark') === 'true'
         : true
+    },
+    getLanguage() {
+      return localStorage.getItem('lang') !== null
+        ? localStorage.getItem('lang')
+        : 'ja'
+    },
+    getNextLanguage() {
+      if (this.lang === '' || this.lang === 'ja') {
+        return 'en'
+      } else {
+        return 'ja'
+      }
     },
   },
 }

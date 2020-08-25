@@ -62,6 +62,8 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    // Doc: https://i18n.nuxtjs.org/
+    'nuxt-i18n',
   ],
   /*
    ** Axios module configuration
@@ -93,6 +95,22 @@ export default {
         },
       },
     },
+  },
+  /**
+   ** nuxt-i18n configuration
+   ** See https://i18n.nuxtjs.org/
+   */
+  i18n: {
+    locales: [
+      { code: 'ja', iso: 'ja-JP', file: 'ja.json' },
+      { code: 'en', iso: 'en-US', file: 'en.json' },
+    ],
+    defaultLocale: 'ja',
+    vueI18n: {
+      fallbackLocale: 'ja',
+    },
+    lazy: true,
+    langDir: 'lang/',
   },
   /*
    ** Build configuration

@@ -35,6 +35,9 @@ typescript)
 - Support the theme switching with icon button on the right of AppBar.
   - Dark <-> Light
   - The settings are stored in localStorage and used for subsequent access.
+- Support multi language switching with `nuxt-i18n`
+  - ja <-> en
+  - You can add or change your own language.
 
 ## Build Setup
 
