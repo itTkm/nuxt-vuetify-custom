@@ -16,8 +16,9 @@ export default {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    // Page title is "title - appName"
+    titleTemplate: '%s - ' + require('./package.json').appName,
+    title: require('./package.json').appName || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -62,6 +63,8 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
+    // Doc: https://i18n.nuxtjs.org/
+    'nuxt-i18n',
   ],
   /*
    ** Axios module configuration
@@ -93,6 +96,22 @@ export default {
         },
       },
     },
+  },
+  /**
+   ** nuxt-i18n configuration
+   ** See https://i18n.nuxtjs.org/
+   */
+  i18n: {
+    locales: [
+      { code: 'ja', iso: 'ja-JP', file: 'ja.json' },
+      { code: 'en', iso: 'en-US', file: 'en.json' },
+    ],
+    defaultLocale: 'ja',
+    vueI18n: {
+      fallbackLocale: 'ja',
+    },
+    lazy: true,
+    langDir: 'lang/',
   },
   /*
    ** Build configuration
