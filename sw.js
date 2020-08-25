@@ -28,5 +28,5 @@ workbox.precaching.cleanupOutdatedCaches()
 // --------------------------------------------------
 
 // Register route handlers for runtimeCaching
-workbox.routing.registerRoute(new RegExp('/itTkm/_nuxt/'), new workbox.strategies.CacheFirst ({}), 'GET')
-workbox.routing.registerRoute(new RegExp('/itTkm/'), new workbox.strategies.NetworkFirst ({}), 'GET')
+workbox.routing.registerRoute(new RegExp('/nuxt-vuetify-custom/_nuxt/'), new workbox.strategies.CacheFirst ({}), 'GET')
+workbox.routing.registerRoute(new RegExp('/nuxt-vuetify-custom/'), new workbox.strategies.NetworkFirst ({}), 'GET')
