@@ -132,13 +132,13 @@ export default {
     getLanguage() {
       return localStorage.getItem('lang') !== null
         ? localStorage.getItem('lang')
-        : 'ja'
+        : 'en'
     },
     getNextLanguage() {
-      if (this.lang === '' || this.lang === 'ja') {
-        return 'en'
-      } else {
+      if (this.lang === '' || this.lang === 'en') {
         return 'ja'
+      } else {
+        return 'en'
       }
     },
   },
